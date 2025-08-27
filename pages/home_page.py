@@ -7,6 +7,7 @@ class HomePage(BasePage):
     # Locator para el botón 'Signup / Login'
 
     SIGNUP_LOGIN_BUTTON = (By.XPATH, "//a[contains(text(), 'Signup / Login')]")
+    LOGGED_IN_AS_TEXT = (By.XPATH, "//a[contains(text(),'Logged in as')]") # texto que verifica si ya estamos loggeados
 
     def go_to(self):
         """Navega a la página principal."""
@@ -20,3 +21,11 @@ class HomePage(BasePage):
     def click_signup_login(self):
         """Hace click en el botón 'Signup / Login'."""
         self.click(self.SIGNUP_LOGIN_BUTTON)
+
+
+    def is_logged_in_as_visible(self, expected_name):
+        """
+        Verifica que el mensaje 'Logged in as <nombre>' esté visible y contenga el nombre esperado.
+        """
+        element = self.wait_for_element(self.LOGGED_IN_AS_TEXT)
+        return expected_name in element.text

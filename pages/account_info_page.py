@@ -20,6 +20,11 @@ class AccountInfoPage(BasePage):
     NEWSLETTER_CHECKBOX = (By.ID, "newsletter")
     OFFERS_CHECKBOX = (By.ID, "optin")
     CREATE_ACCOUNT_BUTTON = (By.CSS_SELECTOR, 'button[data-qa="create-account"]')
+    DATE_DAY_DROPDOWN = (By.ID, "days") 
+    DATE_MONTH_DROPDOWN = (By.ID, "months")
+    DATE_YEAR_DROPDOWN = (By.ID, "years")
+    ACCOUNT_CREATED_MESSAGE = (By.CSS_SELECTOR, 'h2[data-qa="account-created"]')
+    CONTINUE_BUTTON = (By.CSS_SELECTOR, 'a[data-qa="continue-button"]')  
 
     def select_title_mr(self):
         """
@@ -47,6 +52,7 @@ class AccountInfoPage(BasePage):
     def type_password(self, password):
         """Completa el campo Password."""
         self.type_text(self.PASSWORD_INPUT, password)
+
 
     def type_first_name(self, first_name):
         """Completa el campo First Name."""
@@ -94,12 +100,19 @@ class AccountInfoPage(BasePage):
         """Marca el checkbox 'Receive special offers from our partners!' si no está marcado."""
         self.select_checkbox(self.OFFERS_CHECKBOX)
 
+
+
     @allure.step("Completar formulario de Account Information")
-    def fill_account_information(self, user):
+    def fill_account_information(self, user, day="5", month="March", year="2014"):
         """
         Completa el formulario de datos de cuenta usando los datos del diccionario 'user'.
         """
         self.type_password(user["password"])
+        self.select_from_dropdown_by_visible_text(self.DATE_DAY_DROPDOWN, day)
+        self.select_from_dropdown_by_visible_text(self.DATE_MONTH_DROPDOWN, month)
+        self.select_from_dropdown_by_visible_text(self.DATE_YEAR_DROPDOWN, year)
+        self.check_newsletter()
+        self.check_offers()
         self.type_first_name(user["name"])  # Usamos el 'name' generado con Faker como primer nombre
         self.type_last_name(user["last_name"])
         self.type_company(user["company"])
@@ -109,10 +122,27 @@ class AccountInfoPage(BasePage):
         self.type_city(user["city"])
         self.type_zipcode(user["zipcode"])
         self.type_mobile_number(user["mobile_number"])
-        self.check_newsletter()
-        self.check_offers()
+
+
+
 
     @allure.step("Click en 'Create Account'")
     def click_create_account(self):
         """Hace click en el botón para crear la cuenta."""
         self.click(self.CREATE_ACCOUNT_BUTTON)
+
+    @allure.step("Validar que el mensaje 'Account Created!' esté visible")
+    def is_account_created_message_visible(self):
+        """
+        Verifica si el mensaje 'ACCOUNT CREATED!' está visible en la página luego de crear el usuario
+        """
+        return self.is_element_visible(self.ACCOUNT_CREATED_MESSAGE)
+
+
+
+    @allure.step("Click en botón 'Continue'")
+    def click_continue_button(self):
+        """
+        Hace click en el botón 'Continue' que aparece después del mensaje 'ACCOUNT CREATED!'.
+        """
+        self.click(self.CONTINUE_BUTTON)

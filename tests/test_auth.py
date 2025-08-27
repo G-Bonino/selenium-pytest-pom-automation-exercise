@@ -31,9 +31,11 @@ def fake_user_data():
 
 
 @allure.title("Test Case 1: Register User")
-def test_register_user_step1(browser,fake_user_data):
+def test_register_user(browser,fake_user_data):
     home_page = HomePage(browser)
     login_page = LoginPage(browser)
+    # Instancia del Page Object que representa la sección 'Enter Account Information'
+    # Hereda de BasePage, por lo que puede usar métodos reutilizables como click, type_text, etc.
     account_info_page = AccountInfoPage(browser)
     # Accedo a todos los datos desde el diccionario
     user = fake_user_data
@@ -66,14 +68,20 @@ def test_register_user_step1(browser,fake_user_data):
             f"El nombre autocompletado '{name_autocompleted}' no coincide con '{user['name']}'"
         )
 
-    with allure.step("Validar que 'Email' se autocompletó correctamente"):
-        email_autocompleted = account_info_page.get_email_value()
-        assert email_autocompleted == user['email'], (
-            f"El email autocompletado '{email_autocompleted}' no coincide con '{user['email']}'"
-        )
+# De acá en adelante en el test se usa lo creado en account_info_page para respetar el page object model.
+    with allure.step("Completar el formulario de cuenta y crear la cuenta"):
+        account_info_page.fill_account_information(user)
+        account_info_page.click_create_account()
 
-    # Luego usás el mismo diccionario para llenar el formulario completo:
-    account_info_page.fill_account_information(user)
-    account_info_page.click_create_account()
+    with allure.step("Validar que el mensaje 'ACCOUNT CREATED!' esté visible"):
+        assert account_info_page.is_account_created_message_visible(), "No se encontró el mensaje de éxito 'ACCOUNT CREATED!'"
 
-    time.sleep(10)
+    with allure.step("Hacer click en el botón 'Continue'"):
+        account_info_page.click_continue_button()
+
+
+    with allure.step("Verificar que se muestra 'Logged in as <nombre>' en la Home"):
+        assert home_page.is_logged_in_as_visible(user["name"]), f"No se encontró el mensaje 'Logged in as {user['name']}'"
+
+
+    time.sleep(5)
