@@ -79,9 +79,61 @@ def test_register_user(browser,fake_user_data):
     with allure.step("Hacer click en el botón 'Continue'"):
         account_info_page.click_continue_button()
 
+# vuelve a usar lo de la home
 
     with allure.step("Verificar que se muestra 'Logged in as <nombre>' en la Home"):
         assert home_page.is_logged_in_as_visible(user["name"]), f"No se encontró el mensaje 'Logged in as {user['name']}'"
 
+    with allure.step("Hacer click en 'Delete Account'"):
+        home_page.click_delete_account()
 
-    time.sleep(5)
+
+# vuelve a la account_info_page
+    with allure.step("Validar que el mensaje 'ACCOUNT DELETED!' esté visible"):
+        assert account_info_page.is_account_deleted_message_visible(), "No se encontró el mensaje 'ACCOUNT DELETED!'"
+
+    with allure.step("Hacer click en el botón 'Continue' tras eliminar la cuenta"):
+        account_info_page.click_continue_button()
+
+
+
+
+@allure.title("Test Case 2: Login con usuario existente")
+@allure.description("Este test verifica que un usuario puede loguearse correctamente y luego eliminar la cuenta.")
+def test_login_user_with_correct_credentials(browser):
+    home_page = HomePage(browser)
+    login_page = LoginPage(browser)
+    account_info_page = AccountInfoPage(browser)
+
+    email = "testeando@gmail.com"
+    password = "test"
+    name = "test"  # Solo para validación del mensaje 'Logged in as'
+
+    with allure.step("Navegar a la página principal"):
+        home_page.go_to()
+        assert home_page.is_logo_visible()
+
+    with allure.step("Hacer click en 'Signup / Login'"):
+        home_page.click_signup_login()
+
+    with allure.step("Verificar que aparece 'Login to your account'"):
+        assert login_page.is_login_to_your_account_visible()
+
+    with allure.step("Ingresar email y contraseña válidos"):
+        login_page.enter_login_email(email)
+        login_page.enter_login_password(password)
+
+    with allure.step("Hacer click en 'Login'"):
+        login_page.click_login_button()
+
+    with allure.step("Verificar que se muestra 'Logged in as <nombre>' en la Home"):
+        assert home_page.is_logged_in_as_visible(name), f"No se encontró el mensaje 'Logged in as {name}'"
+
+    with allure.step("Eliminar la cuenta"):
+        home_page.click_delete_account()
+
+    with allure.step("Verificar que se muestra 'ACCOUNT DELETED!'"):
+        assert account_info_page.is_account_deleted_message_visible()
+
+    with allure.step("Click en botón 'Continue' después de eliminar la cuenta"):
+        account_info_page.click_continue_button()

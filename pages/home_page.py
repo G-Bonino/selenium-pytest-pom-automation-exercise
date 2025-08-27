@@ -9,6 +9,9 @@ class HomePage(BasePage):
     SIGNUP_LOGIN_BUTTON = (By.XPATH, "//a[contains(text(), 'Signup / Login')]")
     LOGGED_IN_AS_TEXT = (By.XPATH, "//a[contains(text(),'Logged in as')]") # texto que verifica si ya estamos loggeados
 
+    DELETE_ACCOUNT_BUTTON = (By.XPATH, "//a[contains(@href, '/delete_account') and contains(text(), 'Delete Account')]")
+
+
     def go_to(self):
         """Navega a la página principal."""
         self.navigate_to("https://automationexercise.com/")
@@ -29,3 +32,10 @@ class HomePage(BasePage):
         """
         element = self.wait_for_element(self.LOGGED_IN_AS_TEXT)
         return expected_name in element.text
+
+
+    def click_delete_account(self):
+        """
+        Hace click en el botón 'Delete Account' desde la Home.
+        """
+        self.click(self.DELETE_ACCOUNT_BUTTON)

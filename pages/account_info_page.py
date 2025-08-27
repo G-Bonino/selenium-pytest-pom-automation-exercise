@@ -25,6 +25,8 @@ class AccountInfoPage(BasePage):
     DATE_YEAR_DROPDOWN = (By.ID, "years")
     ACCOUNT_CREATED_MESSAGE = (By.CSS_SELECTOR, 'h2[data-qa="account-created"]')
     CONTINUE_BUTTON = (By.CSS_SELECTOR, 'a[data-qa="continue-button"]')  
+    ACCOUNT_DELETED_MESSAGE = (By.CSS_SELECTOR, 'h2[data-qa="account-deleted"]')
+
 
     def select_title_mr(self):
         """
@@ -146,3 +148,12 @@ class AccountInfoPage(BasePage):
         Hace click en el botón 'Continue' que aparece después del mensaje 'ACCOUNT CREATED!'.
         """
         self.click(self.CONTINUE_BUTTON)
+
+
+    @allure.step("Verificar que el mensaje 'ACCOUNT DELETED!' esté visible")
+    def is_account_deleted_message_visible(self):
+        """
+        Verifica que se muestra el mensaje 'ACCOUNT DELETED!' después de eliminar la cuenta.
+        """
+        return self.wait_for_element(self.ACCOUNT_DELETED_MESSAGE).is_displayed()
+
