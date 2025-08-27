@@ -13,6 +13,8 @@ class LoginPage(BasePage):
     LOGIN_EMAIL_INPUT = (By.CSS_SELECTOR, 'input[data-qa="login-email"]')
     LOGIN_PASSWORD_INPUT = (By.CSS_SELECTOR, 'input[data-qa="login-password"]')
     LOGIN_BUTTON = (By.CSS_SELECTOR, 'button[data-qa="login-button"]')
+    LOGIN_ERROR_MESSAGE = (By.XPATH, "//p[contains(text(),'Your email or password is incorrect!')]")
+
 
     def is_new_user_signup_visible(self):
         """Verifica si el encabezado 'New User Signup!' está visible."""
@@ -49,3 +51,8 @@ class LoginPage(BasePage):
 
 
 
+    def is_login_error_visible(self):
+        """
+        Verifica si se muestra el mensaje de error por login inválido.
+        """
+        return self.is_element_visible(self.LOGIN_ERROR_MESSAGE)
