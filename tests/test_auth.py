@@ -171,3 +171,43 @@ def test_login_user_with_incorrect_credentials(browser):
 
     with allure.step("Verificar que se muestra el mensaje de error"):
         assert login_page.is_login_error_visible(), "No se mostró el mensaje de error por login inválido"
+
+
+
+
+@allure.title("Test Case 4: Logout del usuario logueado")
+@allure.description("Verifica que un usuario pueda cerrar sesión y vuelva a la pantalla de login.")
+def test_logout_user(browser):
+    home_page = HomePage(browser)
+    login_page = LoginPage(browser)
+    account_info_page = AccountInfoPage(browser)
+
+    email = "testeando@gmail.com"
+    password = "testeando"
+    name = "Testeando"
+
+    with allure.step("Navegar a la página principal"):
+        home_page.go_to()
+        assert home_page.is_logo_visible()
+
+    with allure.step("Hacer click en 'Signup / Login'"):
+        home_page.click_signup_login()
+
+    with allure.step("Verificar que aparece 'Login to your account'"):
+        assert login_page.is_login_to_your_account_visible()
+
+    with allure.step("Ingresar credenciales correctas"):
+        login_page.enter_login_email(email)
+        login_page.enter_login_password(password)
+
+    with allure.step("Hacer click en 'Login'"):
+        login_page.click_login_button()
+
+    with allure.step("Verificar que se muestra 'Logged in as <nombre>' en la Home"):
+        assert home_page.is_logged_in_as_visible(name), f"No se encontró el mensaje 'Logged in as {name}'"
+
+    with allure.step("Hacer click en 'Logout'"):
+        home_page.click_logout()
+
+    with allure.step("Verificar que vuelve a la pantalla de login"):
+        assert login_page.is_login_to_your_account_visible(), "No se redirigió a la pantalla de login"

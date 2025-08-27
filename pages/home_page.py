@@ -11,6 +11,7 @@ class HomePage(BasePage):
 
     DELETE_ACCOUNT_BUTTON = (By.XPATH, "//a[contains(@href, '/delete_account') and contains(text(), 'Delete Account')]")
 
+    LOGOUT_BUTTON = (By.XPATH, "//a[contains(@href, '/logout') and contains(text(), 'Logout')]")
 
     def go_to(self):
         """Navega a la página principal."""
@@ -39,3 +40,8 @@ class HomePage(BasePage):
         Hace click en el botón 'Delete Account' desde la Home.
         """
         self.click(self.DELETE_ACCOUNT_BUTTON)
+
+
+    def click_logout(self):
+        """Hace click en el botón 'Logout' desde la Home."""
+        self.click(self.LOGOUT_BUTTON)
