@@ -211,3 +211,6 @@ def test_logout_user(browser):
 
     with allure.step("Verificar que vuelve a la pantalla de login"):
         assert login_page.is_login_to_your_account_visible(), "No se redirigió a la pantalla de login"
+
+#source testenv/bin/activate para activar en ambiente
+# allure open allure-report para abrir allure con sus reportes en el navegador
