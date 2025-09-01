@@ -14,6 +14,9 @@ class HomePage(BasePage):
     LOGOUT_BUTTON = (By.XPATH, "//a[contains(@href, '/logout') and contains(text(), 'Logout')]")
 
     CONTACT_US_LINK = (By.LINK_TEXT, "Contact us")
+
+    TEST_CASES_BUTTON = (By.XPATH, "//a[@href='/test_cases']")
+
     
     def go_to(self):
         """Navega a la página principal."""
@@ -52,3 +55,7 @@ class HomePage(BasePage):
     def click_contact_us(self):
         """Abre la pantalla 'Contact Us' desde la Home."""
         self.click(self.CONTACT_US_LINK)
+
+
+    def click_test_cases(self):
+        self.click(self.TEST_CASES_BUTTON)
