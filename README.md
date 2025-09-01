@@ -18,7 +18,7 @@ Incluye flujos completos de autenticación y el formulario de contacto, con repo
   - `LoginPage`: registro y login (inputs, botones, validaciones).
   - `AccountInfoPage`: alta de cuenta (campos, dropdowns, checkboxes, confirmaciones).
   - `ContactPage`: formulario de contacto, **upload de archivo**, manejo de **alert JS** y confirmación de éxito.
-
+  - `TestCasesPage`: validación de la carga de la página de Test Cases (header y URL correctos).
 - **Tests**
   - `test_auth.py`  
     - **TC_1**: Register User  
@@ -27,6 +27,8 @@ Incluye flujos completos de autenticación y el formulario de contacto, con repo
     - **TC_4**: Logout
   - `test_contact.py`  
     - **TC_6**: Contact Us Form (completa campos, sube archivo temporal y valida mensaje de éxito)
+  - `test_test_cases.py`
+    - **TC_7**: Verify Test Cases Page (navega desde Home y valida la carga de la página de Test Cases)
 
 ## Requisitos
 
