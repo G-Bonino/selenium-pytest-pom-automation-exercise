@@ -37,6 +37,12 @@ Incluye flujos completos de autenticación y el formulario de contacto, con repo
 - (Opcional) **Allure CLI** para visualizar reportes
 
 ---
+
+
+
+
+
+
 ## Ejecución
 
 Ejecutar todos los tests:
@@ -50,7 +56,19 @@ pytest tests/test_contact.py -q
 pytest tests/test_contact.py::test_contact_us_form -q
 ```
 
-Abrir reportes en allure:
+## Pytest Markers
+- `@pytest.mark.smoke` → pruebas rápidas y críticas (login, logout, navegación básica).  
+- `@pytest.mark.regression` → pruebas de regresión más completas y escenarios negativos.  
+- `@pytest.mark.e2e` → flujos end-to-end que recorren múltiples funcionalidades.  
+
+> Los markers están registrados en `pytest.ini` para evitar warnings y poder ejecutar suites específicas, por ejemplo:
+> ```bash
+> pytest -m smoke
+> pytest -m regression
+> ```
+
+
+Para abrir reportes en allure:
 ```bash
 pytest --alluredir=allure-results
 allure serve allure-results
