@@ -1,5 +1,0 @@
-"DESCRIPTION","DURATION IN MS","NAME","PARENT SUITE","START TIME","STATUS","STOP TIME","SUB SUITE","SUITE","TEST CLASS","TEST METHOD"
-"Verifica que un usuario pueda cerrar sesión y vuelva a la pantalla de login.","9361","Test Case 4: Logout del usuario logueado","tests","Mon Sep 01 11:01:02 ART 2025","passed","Mon Sep 01 11:01:11 ART 2025","","test_auth","",""
-"Verifica que se muestre el mensaje de error al intentar loguearse con credenciales inválidas.","5174","Test Case 3: Login con usuario y contraseña incorrectos","tests","Mon Sep 01 11:00:56 ART 2025","passed","Mon Sep 01 11:01:01 ART 2025","","test_auth","",""
-"Este test registra un usuario y lo elimina. Usa Faker para crear datos falsos","17938","Test Case 1: Register User","tests","Mon Sep 01 11:00:20 ART 2025","passed","Mon Sep 01 11:00:38 ART 2025","","test_auth","",""
-"Este test verifica que un usuario puede loguearse correctamente y luego eliminar la cuenta.","16030","Test Case 2: Login con usuario existente","tests","Mon Sep 01 11:00:39 ART 2025","broken","Mon Sep 01 11:00:55 ART 2025","","test_auth","",""
