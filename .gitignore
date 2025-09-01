@@ -1,0 +1,26 @@
+# Entornos virtuales
+testenv/
+.venv/
+venv/
+.tox/
+
+# Caches / compilados de Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# Reportes/artefactos
+allure-results/
+allure-report/
+
+# Logs
+*.log
+
+# IDE/Editor
+.idea/
+.vscode/
+
+# Sistema operativo
+.DS_Store
+Thumbs.db
+EOF
