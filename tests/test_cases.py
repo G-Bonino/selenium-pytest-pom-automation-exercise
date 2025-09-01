@@ -4,9 +4,12 @@ import pytest
 from pages.home_page import HomePage
 from pages.cases_page import TestCasesPage
 
+@allure.epic("Navigation")
 @allure.feature("Navigation")
 @allure.story("TC_7 Verify Test Cases Page")
 @allure.title("TC_7 - Verify Test Cases Page")
+@allure.description("Verifica que al hacer clic en 'Test Cases' desde Home, se cargue la página de casos de prueba correctamente.")
+@allure.severity(allure.severity_level.MINOR)
 @pytest.mark.smoke
 def test_verify_test_cases_page(browser):
     home = HomePage(browser)

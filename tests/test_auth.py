@@ -30,9 +30,13 @@ def fake_user_data():
 
 
 
+@allure.epic("Authentication")
+@allure.feature("Register")
+@allure.story("TC_1 Register User")
 @allure.title("Test Case 1: Register User")
-@allure.description("Este test registra un usuario y lo elimina. Usa Faker para crear datos falsos")
-
+@allure.description("Este test registra un usuario y luego lo elimina. Usa Faker para crear datos únicos y evitar duplicados.")
+@allure.severity(allure.severity_level.CRITICAL)
+@pytest.mark.smoke
 def test_register_user(browser,fake_user_data):
     home_page = HomePage(browser)
     login_page = LoginPage(browser)
@@ -100,8 +104,13 @@ def test_register_user(browser,fake_user_data):
 
 
 
+@allure.epic("Authentication")
+@allure.feature("Login")
+@allure.story("TC_2 Login con usuario existente")
 @allure.title("Test Case 2: Login con usuario existente")
 @allure.description("Este test verifica que un usuario puede loguearse correctamente y luego eliminar la cuenta.")
+@allure.severity(allure.severity_level.CRITICAL)
+@pytest.mark.smoke
 def test_login_user_with_correct_credentials(browser):
     home_page = HomePage(browser)
     login_page = LoginPage(browser)
@@ -142,8 +151,13 @@ def test_login_user_with_correct_credentials(browser):
 
 
 
+@allure.epic("Authentication")
+@allure.feature("Login")
+@allure.story("TC_3 Login con credenciales inválidas")
 @allure.title("Test Case 3: Login con usuario y contraseña incorrectos")
 @allure.description("Verifica que se muestre el mensaje de error al intentar loguearse con credenciales inválidas.")
+@allure.severity(allure.severity_level.NORMAL)
+@pytest.mark.regression
 def test_login_user_with_incorrect_credentials(browser):
     fake = Faker()
     home_page = HomePage(browser)
@@ -175,8 +189,14 @@ def test_login_user_with_incorrect_credentials(browser):
 
 
 
+
+@allure.epic("Authentication")
+@allure.feature("Logout")
+@allure.story("TC_4 Logout de usuario logueado")
 @allure.title("Test Case 4: Logout del usuario logueado")
 @allure.description("Verifica que un usuario pueda cerrar sesión y vuelva a la pantalla de login.")
+@allure.severity(allure.severity_level.CRITICAL)
+@pytest.mark.smoke
 def test_logout_user(browser):
     home_page = HomePage(browser)
     login_page = LoginPage(browser)

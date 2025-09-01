@@ -9,8 +9,13 @@ import time
 from pages.home_page import HomePage
 from pages.contact_page import ContactPage
 
+@allure.epic("Support")
+@allure.feature("Contact Us Form")
+@allure.story("TC_6 Contact Us Form")
 @allure.title("Test Case 6: Contact Us Form")
 @allure.description("Completa el formulario de contacto, sube un archivo y verifica el mensaje de éxito.")
+@allure.severity(allure.severity_level.NORMAL)
+@pytest.mark.regression
 def test_contact_us_form(browser):
     fake = Faker()
     home_page = HomePage(browser)
