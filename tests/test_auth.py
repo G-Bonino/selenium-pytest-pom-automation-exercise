@@ -116,8 +116,8 @@ def test_login_user_with_correct_credentials(browser):
     login_page = LoginPage(browser)
     account_info_page = AccountInfoPage(browser)
 
-    email = "testeando@gmail.com"
-    password = "test"
+    email = "testeando1@gmail.com"
+    password = "test1"
     name = "test"  # Solo para validación del mensaje 'Logged in as'
 
     with allure.step("Navegar a la página principal"):
