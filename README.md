@@ -19,6 +19,9 @@ Incluye flujos completos de autenticación y el formulario de contacto, con repo
   - `AccountInfoPage`: alta de cuenta (campos, dropdowns, checkboxes, confirmaciones).
   - `ContactPage`: formulario de contacto, **upload de archivo**, manejo de **alert JS** y confirmación de éxito.
   - `TestCasesPage`: validación de la carga de la página de Test Cases (header y URL correctos).
+  - `ProductsPage`: navegación a la sección **All Products**, verificación de lista de productos, acceso a detalles.
+  - `ProductDetailPage`: extracción de datos del detalle de un producto (**nombre, categoría, precio, availability, condition, brand**).
+
 - **Tests**
   - `test_auth.py`  
     - **TC_1**: Register User  
@@ -29,6 +32,7 @@ Incluye flujos completos de autenticación y el formulario de contacto, con repo
     - **TC_6**: Contact Us Form (completa campos, sube archivo temporal y valida mensaje de éxito)
   - `test_test_cases.py`
     - **TC_7**: Verify Test Cases Page (navega desde Home y valida la carga de la página de Test Cases)
+    - **TC_8**: Product Detail Visibility (accede al primer producto y valida que se muestren todos sus detalles)
 
 ## Requisitos
 
