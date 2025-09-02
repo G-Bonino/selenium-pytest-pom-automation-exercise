@@ -17,6 +17,8 @@ class HomePage(BasePage):
 
     TEST_CASES_BUTTON = (By.XPATH, "//a[@href='/test_cases']")
 
+    PRODUCTS_BUTTON = (By.XPATH, "//a[@href='/products']")
+
     
     def go_to(self):
         """Navega a la página principal."""
@@ -59,3 +61,7 @@ class HomePage(BasePage):
 
     def click_test_cases(self):
         self.click(self.TEST_CASES_BUTTON)
+
+
+    def click_products_button(self):
+        self.click(self.PRODUCTS_BUTTON)
