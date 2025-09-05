@@ -17,12 +17,18 @@ class HomePage(BasePage):
 
     TEST_CASES_BUTTON = (By.XPATH, "//a[@href='/test_cases']")
 
+    PRODUCTS_BUTTON = (By.XPATH, "//a[@href='/products']")
+
     
     def go_to(self):
         """Navega a la página principal."""
         self.navigate_to("https://automationexercise.com/")
 
     def is_logo_visible(self):
+        """Verifica si el logo está visible (confirma que es que la Home está cargando correctamente)."""
+        return self.is_element_visible(self.LOGO)
+        
+    def is_home_page_visible(self):
         """Verifica si el logo está visible (confirma que es que la Home está cargando correctamente)."""
         return self.is_element_visible(self.LOGO)
         
@@ -59,3 +65,7 @@ class HomePage(BasePage):
 
     def click_test_cases(self):
         self.click(self.TEST_CASES_BUTTON)
+
+
+    def click_products_button(self):
+        self.click(self.PRODUCTS_BUTTON)

@@ -2,6 +2,12 @@ from selenium.webdriver.support.ui import WebDriverWait, Select
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver import ActionChains
 
+
+
+DEFAULT_TIMEOUT = 10
+DEFAULT_POLL_FREQUENCY = 0.2 #“Cada cuánto tiempo selenium vuelve a intentar buscar el elemento mientras espera”.
+
+
 class BasePage:
     def __init__(self, driver):
         self.driver = driver
@@ -84,3 +90,11 @@ class BasePage:
         """
         element = self.wait_for_element(locator)
         return element.get_attribute("value")
+
+
+    def get_text(self, locator, timeout: int = DEFAULT_TIMEOUT) -> str:
+        """
+        Espera visibilidad y devuelve el texto .text del elemento (strip).
+        """
+        element = self.wait_for_element(locator, timeout)
+        return element.text.strip()
