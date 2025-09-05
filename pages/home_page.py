@@ -1,6 +1,6 @@
 from selenium.webdriver.common.by import By
 from base.base_page import BasePage
-
+import allure 
 class HomePage(BasePage):
     # Locator para el logo (verifica que estás en la Home)
     LOGO = (By.CSS_SELECTOR, "img[alt='Website for automation practice']")
@@ -19,7 +19,18 @@ class HomePage(BasePage):
 
     PRODUCTS_BUTTON = (By.XPATH, "//a[@href='/products']")
 
-    
+
+    SUBSCRIPTION_TITLE = (By.XPATH, "//h2[text()='Subscription']")
+
+    SUBSCRIPTION_INPUT = (By.ID, "susbscribe_email")
+
+    SUBSCRIBE_BUTTON = (By.ID, "subscribe") 
+
+    SUCCESS_MESSAGE = (By.CSS_SELECTOR, ".alert-success")
+
+
+
+
     def go_to(self):
         """Navega a la página principal."""
         self.navigate_to("https://automationexercise.com/")
@@ -69,3 +80,22 @@ class HomePage(BasePage):
 
     def click_products_button(self):
         self.click(self.PRODUCTS_BUTTON)
+
+
+
+    def scroll_to_footer(self):
+        self.driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
+
+
+    def verify_subscription_text(self):
+        assert self.wait_for_element(self.SUBSCRIPTION_TITLE).is_displayed(), \
+            "'SUBSCRIPTION' text no está visible"
+
+    #Enter email {email} and click subscribe#
+    def subscribe(self, email):
+        self.wait_for_element(self.SUBSCRIPTION_INPUT).send_keys(email)
+        self.wait_for_element(self.SUBSCRIBE_BUTTON).click()
+
+    def verify_success_message(self):
+        assert self.wait_for_element(self.SUCCESS_MESSAGE).is_displayed(), \
+            "Mensaje de suscripción exitosa no visible"
