@@ -30,10 +30,11 @@ Incluye flujos completos de autenticación y el formulario de contacto, con repo
     - **TC_4**: Logout
   - `test_contact.py`  
     - **TC_6**: Contact Us Form (completa campos, sube archivo temporal y valida mensaje de éxito)
-  - `test_test_cases.py`
+  - `test_cases.py`
     - **TC_7**: Verify Test Cases Page (navega desde Home y valida la carga de la página de Test Cases)
+  - `test_products.py`
     - **TC_8**: Product Detail Visibility (accede al primer producto y valida que se muestren todos sus detalles)
-
+    - **TC09**: Search Product (Busca un producto en específico y espera que sus resultados sean visibles)
 ## Requisitos
 
 - **Python 3.12+**
@@ -83,8 +84,7 @@ allure serve allure-results
 
 ```bash
 # Clonar el repositorio
-git clone https://github.com/<tu-usuario>/<tu-repo>.git
-cd <tu-repo>
+git clone https://github.com/<tu-usuario>/selenium-pytest-pom-automation-exercise.git
 
 # Crear y activar entorno virtual
 python -m venv .venv
