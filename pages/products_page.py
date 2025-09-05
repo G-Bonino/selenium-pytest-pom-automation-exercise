@@ -12,6 +12,16 @@ class ProductsPage(BasePage):
     FIRST_VIEW_PRODUCT_BUTTON = (By.XPATH, "(//a[contains(@href, '/product_details')])[1]")
     PRODUCT_CARDS = (By.CSS_SELECTOR, ".features_items .col-sm-4")  # items en el grid
 
+
+    SEARCH_INPUT = (By.ID, "search_product")
+    SEARCH_BUTTON = (By.ID, "submit_search")
+    SEARCHED_PRODUCTS_TITLE = (By.XPATH, "//h2[@class='title text-center' and normalize-space()='Searched Products']")
+
+    @allure.step("Buscar producto: {product_name}")
+    def search_product(self, product_name):
+        self.type_text(self.SEARCH_INPUT, product_name)
+        self.click(self.SEARCH_BUTTON)
+
     @allure.step("Ir a la sección de Productos desde el navbar")
     def go_to_products_page(self):
         """Hace click en el botón de navegación hacia la sección Products"""
@@ -21,6 +31,7 @@ class ProductsPage(BasePage):
     def is_products_page_visible(self):
         """True si se ve la imagen 'sale' y el título 'All Products'"""
         return self.is_element_visible(self.SALE_IMAGE) and self.is_element_visible(self.ALL_PRODUCTS_TITLE)
+
 
     @allure.step("Verificar que la lista de productos es visible")
     def is_product_list_visible(self, timeout: int = 10) -> bool:
@@ -35,3 +46,20 @@ class ProductsPage(BasePage):
         btn = self.wait_for_element(self.FIRST_VIEW_PRODUCT_BUTTON)
         url = btn.get_attribute("href")
         self.driver.get(url)
+
+
+
+    @allure.step("Verificar que el título 'Searched Products' está visible")
+    def is_search_result_section_visible(self) -> bool:
+        return self.is_element_visible(self.SEARCHED_PRODUCTS_TITLE)
+
+    @allure.step("Verificar que hay productos visibles en los resultados")
+    def are_search_results_visible(self, timeout: int = 10) -> bool:
+        """
+        Implementa el paso 8 del caso:
+        'Verify all the products related to search are visible' -> al menos 1 card visible.
+        """
+        products = WebDriverWait(self.driver, timeout).until(
+            EC.visibility_of_any_elements_located(self.PRODUCT_CARDS)
+        )
+        return len(products) > 0

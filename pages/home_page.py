@@ -28,6 +28,10 @@ class HomePage(BasePage):
         """Verifica si el logo está visible (confirma que es que la Home está cargando correctamente)."""
         return self.is_element_visible(self.LOGO)
         
+    def is_home_page_visible(self):
+        """Verifica si el logo está visible (confirma que es que la Home está cargando correctamente)."""
+        return self.is_element_visible(self.LOGO)
+        
 
     def click_signup_login(self):
         """Hace click en el botón 'Signup / Login'."""
