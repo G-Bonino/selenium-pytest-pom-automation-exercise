@@ -28,7 +28,7 @@ class HomePage(BasePage):
 
     SUCCESS_MESSAGE = (By.CSS_SELECTOR, ".alert-success")
 
-
+    CART_BUTTON = (By.XPATH, "//a[@href='/view_cart']")
 
 
     def go_to(self):
@@ -99,3 +99,8 @@ class HomePage(BasePage):
     def verify_success_message(self):
         assert self.wait_for_element(self.SUCCESS_MESSAGE).is_displayed(), \
             "Mensaje de suscripción exitosa no visible"
+        
+
+    def click_cart(self):
+        """Hace click en el botón 'Cart' desde la barra principal."""
+        self.click(self.CART_BUTTON)
