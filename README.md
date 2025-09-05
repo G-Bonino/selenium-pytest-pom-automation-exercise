@@ -35,6 +35,9 @@ Incluye flujos completos de autenticación y el formulario de contacto, con repo
   - `test_products.py`
     - **TC_8**: Product Detail Visibility (accede al primer producto y valida que se muestren todos sus detalles)
     - **TC09**: Search Product (Busca un producto en específico y espera que sus resultados sean visibles)
+  - `test_subscription.py`
+    - **TC10**: Verificar suscripción desde el footer
+    - **TC11**: Verificar suscripción desde la página del carrito
 ## Requisitos
 
 - **Python 3.12+**
